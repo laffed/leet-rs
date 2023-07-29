@@ -11,10 +11,15 @@ Constraints:
 0 <= prices[i] <= 10^4
 */
 
+/*
+T: O(N)
+S: O(1)
+*/
 pub fn solution<P>(prices: P) -> i32
 where
     P: IntoIterator<Item = i32> + Copy,
 {
+    let mut profit = 0;
     0
 }
 
@@ -23,7 +28,7 @@ mod tests {
     use super::*;
     use crate::util::TestCase;
 
-    const TEST_CASES: [TestCase<[i32; 6], i32>; 2] = [
+    const TEST_CASES: [TestCase<[i32; 6], i32>; 3] = [
         TestCase {
             input: [7, 1, 5, 3, 6, 4],
             expected: 5,
@@ -31,6 +36,10 @@ mod tests {
         TestCase {
             input: [7, 6, 4, 3, 1, 0],
             expected: 0,
+        },
+        TestCase {
+            input: [7, 2, 6, 3, 1, 3],
+            expected: 4,
         },
     ];
 
