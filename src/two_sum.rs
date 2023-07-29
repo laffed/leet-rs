@@ -11,11 +11,53 @@ Constraints:
 Only one valid answer exists.
 */
 
+use std::collections::HashMap;
+
+/*
+Naive solution
+T: O(N^2)
+S: O(1)
+*/
 pub fn solution_a<N>(nums: N, target: i32) -> (i32, i32)
 where
-    N: IntoIterator<Item = i32>,
+    N: IntoIterator<Item = i32> + Copy,
 {
-    (17, 18)
+    for (i, x) in nums.into_iter().enumerate() {
+        for (j, y) in nums.into_iter().enumerate() {
+            if i == j {
+                continue;
+            }
+
+            let sum = x + y;
+            if sum == target {
+                return (i as i32, j as i32);
+            }
+        }
+    }
+
+    (-1, -1)
+}
+
+/*
+Linear solution
+T: O(N)
+S: O(N)
+*/
+pub fn solution_b<N>(nums: N, target: i32) -> (i32, i32)
+where
+    N: IntoIterator<Item = i32> + Copy,
+{
+    let mut dict: HashMap<i32, usize> = HashMap::new();
+    for (j, x) in nums.into_iter().enumerate() {
+        let diff = target - x;
+        if let Some(i) = dict.get(&diff) {
+            return (i.clone() as i32, j as i32);
+        }
+
+        dict.insert(x, j);
+    }
+
+    (-1, -1)
 }
 
 #[cfg(test)]
@@ -25,7 +67,7 @@ mod tests {
 
     const TEST_CASES: [TestCase<([i32; 4], i32), (i32, i32)>; 3] = [
         TestCase {
-            input: ([2i32, 7, 11, 15], 9i32),
+            input: ([2, 7, 11, 15], 9),
             expected: (0, 1),
         },
         TestCase {
@@ -38,17 +80,27 @@ mod tests {
         },
     ];
 
-    // let t: static = TestCase::new((vec![2, 7, 11, 15], 9), (0, 1));
-
     #[test]
     fn test_a() {
         for c in TEST_CASES.iter() {
-            let (nums, target) = c.input();
-            let expected = c.expected().clone();
+            let (nums, target) = c.input;
+            let expected = c.expected;
 
-            let res = solution_a(nums.clone(), target.clone());
+            let res = solution_a(nums, target);
 
-            assert_eq!(res, expected.clone());
+            assert_eq!(res, expected);
+        }
+    }
+
+    #[test]
+    fn test_b() {
+        for c in TEST_CASES.iter() {
+            let (nums, target) = c.input;
+            let expected = c.expected;
+
+            let res = solution_b(nums, target);
+
+            assert_eq!(res, expected);
         }
     }
 }
