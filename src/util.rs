@@ -9,12 +9,4 @@ impl<I, E> TestCase<I, E> {
     pub fn new(input: I, expected: E) -> Self {
         TestCase { input, expected }
     }
-
-    pub fn input(&self) -> &I {
-        &self.input
-    }
-
-    pub fn expected(&self) -> &E {
-        &self.expected
-    }
 }

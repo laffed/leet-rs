@@ -81,7 +81,7 @@ mod tests {
     ];
 
     #[test]
-    fn test_a() {
+    fn a() {
         for c in TEST_CASES.iter() {
             let (nums, target) = c.input;
             let expected = c.expected;
@@ -93,7 +93,7 @@ mod tests {
     }
 
     #[test]
-    fn test_b() {
+    fn b() {
         for c in TEST_CASES.iter() {
             let (nums, target) = c.input;
             let expected = c.expected;
