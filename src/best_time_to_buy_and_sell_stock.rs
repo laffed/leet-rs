@@ -20,7 +20,14 @@ where
     P: IntoIterator<Item = i32> + Copy,
 {
     let mut profit = 0;
-    0
+    // slightly more elegant than setting to el[0] and starting loop at 1
+    let mut current_min = i32::MAX;
+    for i in prices.into_iter() {
+        profit = profit.max(i - current_min);
+        current_min = current_min.min(i);
+    }
+
+    profit
 }
 
 #[cfg(test)]
