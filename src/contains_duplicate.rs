@@ -10,6 +10,8 @@ Constraints:
 -10^9 <= nums[i] <= 10^9
 */
 
+use std::collections::HashSet;
+
 /*
 Naive solution
 T: O(N^2)
@@ -33,15 +35,24 @@ where
 }
 
 /*
-Sorted solution cloned
-T: O(NlogN)
-S: O(N) -> if unable to sort in place
+Set solution
+T: O(N)
+S: O(N)
 */
-pub fn solution_b<N>(nums: &N) -> bool
+pub fn solution_b<N>(nums: N) -> bool
 where
     N: IntoIterator<Item = i32> + Copy,
 {
-    true
+    let mut set: HashSet<i32> = HashSet::new();
+
+    for i in nums.into_iter() {
+        if set.contains(&i) {
+            return true;
+        }
+        set.insert(i);
+    }
+
+    false
 }
 
 /*
@@ -50,6 +61,18 @@ T: O(NlogN)
 S: O(1)
 */
 pub fn solution_c<N>(nums: N) -> bool
+where
+    N: IntoIterator<Item = i32> + Copy,
+{
+    true
+}
+
+/*
+Sorted solution cloned
+T: O(NlogN)
+S: O(N) -> if unable to sort in place
+*/
+pub fn solution_d<N>(nums: &N) -> bool
 where
     N: IntoIterator<Item = i32> + Copy,
 {
@@ -85,9 +108,9 @@ mod tests {
 
     #[test]
     fn b() {
-        assert_eq!(solution_b(&TC_0.input), TC_0.expected);
-        assert_eq!(solution_b(&TC_1.input), TC_1.expected);
-        assert_eq!(solution_b(&TC_2.input), TC_2.expected);
+        assert_eq!(solution_b(TC_0.input), TC_0.expected);
+        assert_eq!(solution_b(TC_1.input), TC_1.expected);
+        assert_eq!(solution_b(TC_2.input), TC_2.expected);
     }
 
     #[test]
@@ -95,5 +118,12 @@ mod tests {
         assert_eq!(solution_c(TC_0.input), TC_0.expected);
         assert_eq!(solution_c(TC_1.input), TC_1.expected);
         assert_eq!(solution_c(TC_2.input), TC_2.expected);
+    }
+
+    #[test]
+    fn d() {
+        assert_eq!(solution_d(&TC_0.input), TC_0.expected);
+        assert_eq!(solution_d(&TC_1.input), TC_1.expected);
+        assert_eq!(solution_d(&TC_2.input), TC_2.expected);
     }
 }
