@@ -64,7 +64,8 @@ pub fn solution_c<N>(nums: N) -> bool
 where
     N: IntoIterator<Item = i32> + Copy,
 {
-    true
+    let nums = nums.into_iter().collect::<Vec<i32>>().sort();
+    false
 }
 
 /*
@@ -76,7 +77,7 @@ pub fn solution_d<N>(nums: &N) -> bool
 where
     N: IntoIterator<Item = i32> + Copy,
 {
-    true
+    false
 }
 
 #[cfg(test)]
