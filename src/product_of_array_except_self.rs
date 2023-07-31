@@ -22,7 +22,6 @@ S: O(1)
 pub fn solution_a(nums: Vec<i32>) -> Vec<i32> {
     let mut contains_zero = NumZeroes::NoZeros;
     let mut product_without_zero = 1;
-    let mut res = Vec::with_capacity(nums.len());
 
     for n in nums.iter() {
         if *n == 0 {
@@ -35,6 +34,8 @@ pub fn solution_a(nums: Vec<i32>) -> Vec<i32> {
             product_without_zero *= n;
         }
     }
+
+    let mut res = Vec::with_capacity(nums.len());
 
     for (i, n) in nums.iter().enumerate() {
         let v = match contains_zero {
