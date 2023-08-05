@@ -15,7 +15,7 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
 
 /*
 */
-pub fn solution_a(nums: Vec<i32>) -> i32 {
+pub fn solution_a(_nums: Vec<i32>) -> i32 {
     0
 }
 
