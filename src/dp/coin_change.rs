@@ -14,8 +14,42 @@ Constraints:
 0 <= amount <= 10^4
 */
 
-pub fn solution(_coins: Vec<u32>, _amount: u32) -> i32 {
-    -1
+/*
+* T: O(S * N)
+* S: O(S)
+* where:
+*   S -> amount
+*   N -> coins.len()
+*
+* Note: for idiomaticity, solution returns None instead of -1
+*/
+pub fn solution(coins: Vec<u32>, amount: u32) -> Option<u32> {
+    dfs(&coins, Some(amount))
+}
+
+fn dfs(coins: &Vec<u32>, rem: Option<u32>) -> Option<u32> {
+    let rem = match rem {
+        None => {
+            return None;
+        }
+        Some(0) => return Some(0),
+        Some(n) => n,
+    };
+
+    let mut min_cost = u32::MAX;
+    for coin in coins.iter() {
+        let next_rem = rem.checked_sub(*coin);
+        let res = dfs(&coins, next_rem);
+        if let Some(r) = res {
+            min_cost = min_cost.min(r + 1);
+        }
+    }
+
+    if min_cost == u32::MAX {
+        return None;
+    }
+
+    Some(min_cost)
 }
 
 #[cfg(test)]
@@ -24,16 +58,16 @@ mod tests {
 
     #[test]
     fn a_0() {
-        assert_eq!(solution(vec![1, 2, 5], 11), 3);
+        assert_eq!(solution(vec![1, 2, 5], 11), Some(3));
     }
 
     #[test]
     fn a_1() {
-        assert_eq!(solution(vec![2], 3), -1);
+        assert_eq!(solution(vec![2], 3), None);
     }
 
     #[test]
     fn a_2() {
-        assert_eq!(solution(vec![1], 0), 0);
+        assert_eq!(solution(vec![1], 0), Some(0));
     }
 }
