@@ -111,18 +111,4 @@ mod tests {
         assert_eq!(solution_b(TC_1.input), TC_1.expected);
         assert_eq!(solution_b(TC_2.input), TC_2.expected);
     }
-
-    // #[test]
-    // fn c() {
-    //     assert_eq!(solution_c(TC_0.input), TC_0.expected);
-    //     assert_eq!(solution_c(TC_1.input), TC_1.expected);
-    //     assert_eq!(solution_c(TC_2.input), TC_2.expected);
-    // }
-    //
-    // #[test]
-    // fn d() {
-    //     assert_eq!(solution_d(&TC_0.input), TC_0.expected);
-    //     assert_eq!(solution_d(&TC_1.input), TC_1.expected);
-    //     assert_eq!(solution_d(&TC_2.input), TC_2.expected);
-    // }
 }

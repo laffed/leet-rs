@@ -14,9 +14,20 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
 */
 
 /*
+Kadane's Algo
+T: O(N)
+S: O(1)
 */
-pub fn solution_a(_nums: Vec<i32>) -> i32 {
-    0
+pub fn solution_a(nums: Vec<i32>) -> i32 {
+    let mut max_sub = i32::MIN;
+    let mut curr_sub = i32::MIN;
+
+    for n in nums.iter() {
+        curr_sub = n.clone().max(curr_sub.saturating_add(n.clone()));
+        max_sub = max_sub.max(curr_sub);
+    }
+
+    max_sub
 }
 
 #[cfg(test)]
