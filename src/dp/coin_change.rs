@@ -29,9 +29,7 @@ pub fn solution(coins: Vec<u32>, amount: u32) -> Option<u32> {
 
 fn dfs(coins: &Vec<u32>, rem: Option<u32>) -> Option<u32> {
     let rem = match rem {
-        None => {
-            return None;
-        }
+        None => return None,
         Some(0) => return Some(0),
         Some(n) => n,
     };
