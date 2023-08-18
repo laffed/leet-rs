@@ -23,8 +23,51 @@ n == height.length
 0 <= height[i] <= 10^4
 */
 
-pub fn solution_a(_height: Vec<i32>) -> i32 {
-    0
+/*
+Naive approach
+T: O(N^2)
+S: O(1)
+*/
+pub fn solution_a(heights: Vec<u32>) -> u32 {
+    let mut max_area = 0;
+    'left: for (i, a) in heights.iter().enumerate() {
+        for (j, b) in heights.iter().enumerate().rev() {
+            if i == j {
+                continue 'left;
+            }
+            // constraint enforces that 2^32 - 1 > usize (10^5)
+            let i = i as u32;
+            let j = j as u32;
+            let area = (j - i) * a.min(b);
+            max_area = max_area.max(area);
+        }
+    }
+    max_area
+}
+
+/*
+Sliding window
+T: O(N)
+S: O(1)
+*/
+pub fn solution_b(heights: Vec<u32>) -> u32 {
+    let mut max_area = 0;
+    let mut heights = heights.iter().enumerate();
+
+    let mut left = heights.next();
+    let mut right = heights.next_back();
+
+    while let (Some((i, a)), Some((j, b))) = (left, right) {
+        max_area = max_area.max(a.min(b) * (j - i) as u32);
+
+        if a <= b {
+            left = heights.next();
+        } else {
+            right = heights.next_back();
+        }
+    }
+
+    max_area
 }
 
 #[cfg(test)]
@@ -32,14 +75,26 @@ mod tests {
     use super::*;
 
     #[test]
-    fn a() {
+    fn a_0() {
         let input = vec![1, 8, 6, 2, 5, 4, 8, 3, 7];
         assert_eq!(solution_a(input), 49);
     }
 
     #[test]
-    fn b() {
+    fn a_1() {
         let input = vec![1, 1];
         assert_eq!(solution_a(input), 1);
+    }
+
+    #[test]
+    fn b_0() {
+        let input = vec![1, 8, 6, 2, 5, 4, 8, 3, 7];
+        assert_eq!(solution_b(input), 49);
+    }
+
+    #[test]
+    fn b_1() {
+        let input = vec![1, 1];
+        assert_eq!(solution_b(input), 1);
     }
 }
