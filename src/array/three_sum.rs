@@ -15,10 +15,19 @@ Constraints:
 */
 
 /*
+Naive solution
+T: O(N^3)
+S: O(N)
+*/
+pub fn solution_a(_nums: Vec<i32>) -> Vec<Vec<i32>> {
+    vec![]
+}
+
+/*
 T:
 S:
 */
-pub fn solution_a<N>(_nums: N) -> Vec<Vec<i32>> {
+pub fn solution_b(_nums: Vec<i32>) -> Vec<Vec<i32>> {
     vec![]
 }
 
