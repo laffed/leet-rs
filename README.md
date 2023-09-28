@@ -9,7 +9,7 @@ Selections from the [Blind 75](https://leetcode.com/discuss/general-discussion/4
 | **LC #** | **Solution** |
 | -------- | ------------ |
 | [#1](https://leetcode.com/problems/two-sum/) | [Two Sum](./src/array/two_sum.rs) |
-| [#121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [Best Time to Buy and Sell Stock](./src/array/best-time-to-buy-and-sell-stock.rs) |
+| [#121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [Best Time to Buy and Sell Stock](./src/array/best_time_to_buy_and_sell_stock.rs) |
 | [#217](https://leetcode.com/problems/contains-duplicate/) | [Contains Duplicate](./src/array/contains_duplicate.rs) |
 | [#238](https://leetcode.com/problems/product-of-array-except-self/) | [Product of Array Except Self](./src/array/product_of_array_except_self.rs) |
 | [#53](https://leetcode.com/problems/maximum-subarray/) | [Maximum Subarray](./src/dp/maximum_subarray.rs) |
