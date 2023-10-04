@@ -17,38 +17,46 @@ Constraints:
 use std::collections::HashSet;
 
 /*
-Naive solution
-T: O(N^3)
-S: O(N)
+Two Pointer Solution
+T: O(N^2 + NLogN) -> O(N^2)
+S: O(LogN)
 */
 pub fn solution_a(nums: Vec<i32>) -> Vec<Vec<i32>> {
     let mut res: Vec<Vec<i32>> = Vec::new();
+    let mut nums = nums.clone();
+    nums.sort();
 
-    for (i, x) in nums.iter().enumerate() {
-        for (j, y) in nums.iter().enumerate().skip(i + 1) {
-            for (_, z) in nums.iter().enumerate().skip(j + 1) {
-                let sum = x + y + z;
-                if sum != 0 {
-                    continue;
-                }
-
-                let mut v = vec![x.clone(), y.clone(), z.clone()];
-                v.sort();
-                res.push(v);
-            }
+    for (i, n) in nums.iter().enumerate() {
+        if *n > 0 {
+            break;
+        }
+        if i == 0 || nums[i - 1] != nums[i] {
+            two_sum_ii(&nums, i, &mut res);
         }
     }
 
-    res.dedup();
     res
 }
 
-/*
-T:
-S:
-*/
-pub fn solution_b(_nums: Vec<i32>) -> Vec<Vec<i32>> {
-    vec![]
+fn two_sum_ii(nums: &Vec<i32>, i: usize, res: &mut Vec<Vec<i32>>) {
+    let mut lo = i;
+    let mut hi = nums.len() - 1;
+
+    while lo < hi {
+        let sum = nums[i] + nums[lo] + nums[hi];
+        if sum < 0 {
+            lo += 1;
+        } else if sum > 0 {
+            hi -= 1;
+        } else {
+            res.push(vec![nums[i], nums[lo], nums[hi]]);
+            lo += 1;
+            hi -= 1;
+            while lo < hi && nums[lo] == nums[lo - 1] {
+                lo += 1;
+            }
+        }
+    }
 }
 
 #[cfg(test)]
