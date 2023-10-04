@@ -65,10 +65,8 @@ mod tests {
 
     #[test]
     fn a_0() {
-        assert_eq!(
-            solution_a(vec![-1, 0, 1, 2, -1, -4]),
-            vec![vec![-1, -1, 2], vec![-1, 0, 1]]
-        );
+        let right = vec![vec![-1, -1, 2], vec![-1, 0, 1]];
+        assert_eq!(solution_a(vec![-1, 0, 1, 2, -1, -4]), right);
     }
 
     #[test]
