@@ -44,16 +44,20 @@ fn two_sum_ii(nums: &Vec<i32>, i: usize, res: &mut Vec<Vec<i32>>) {
 
     while lo < hi {
         let sum = nums[i] + nums[lo] + nums[hi];
-        if sum < 0 {
-            lo += 1;
-        } else if sum > 0 {
-            hi -= 1;
-        } else {
-            res.push(vec![nums[i], nums[lo], nums[hi]]);
-            lo += 1;
-            hi -= 1;
-            while lo < hi && nums[lo] == nums[lo - 1] {
+        match sum.cmp(&0) {
+            std::cmp::Ordering::Less => {
                 lo += 1;
+            }
+            std::cmp::Ordering::Greater => {
+                hi -= 1;
+            }
+            std::cmp::Ordering::Equal => {
+                res.push(vec![nums[i], nums[lo], nums[hi]]);
+                lo += 1;
+                hi -= 1;
+                while lo < hi && nums[lo] == nums[lo - 1] {
+                    lo += 1;
+                }
             }
         }
     }

@@ -37,7 +37,7 @@ fn dfs(coins: &Vec<u32>, rem: Option<u32>) -> Option<u32> {
     let mut min_cost = u32::MAX;
     for coin in coins.iter() {
         let next_rem = rem.checked_sub(*coin);
-        let res = dfs(&coins, next_rem);
+        let res = dfs(coins, next_rem);
         if let Some(r) = res {
             min_cost = min_cost.min(r + 1);
         }

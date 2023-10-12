@@ -5,6 +5,7 @@ pub struct TestCase<I, E> {
 }
 
 #[cfg(test)]
+#[allow(dead_code)]
 impl<I, E> TestCase<I, E> {
     pub fn new(input: I, expected: E) -> Self {
         TestCase { input, expected }

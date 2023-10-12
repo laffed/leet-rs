@@ -53,7 +53,7 @@ where
     for (j, x) in nums.into_iter().enumerate() {
         let diff = target - x;
         if let Some(i) = dict.get(&diff) {
-            return (i.clone() as i32, j as i32);
+            return (*i as i32, j as i32);
         }
 
         dict.insert(x, j);

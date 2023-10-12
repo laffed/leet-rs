@@ -23,10 +23,10 @@ pub fn solution_a(nums: Vec<i32>) -> i32 {
     let mut curr_sub = i32::MIN;
 
     for n in nums.iter() {
-        let curr_sub_plus_n = curr_sub.saturating_add(n.clone());
+        let curr_sub_plus_n = curr_sub.saturating_add(*n);
         // if curr_sub is negative, curr_sub_plus_n will always be < n
         // therefore max of n and curr_sub_plus_n is equivalent to "reset curr_sub if negative"
-        curr_sub = n.clone().max(curr_sub_plus_n);
+        curr_sub = (*n).max(curr_sub_plus_n);
         max_sub = max_sub.max(curr_sub);
     }
 
